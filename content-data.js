@@ -25,16 +25,5 @@ window.LAB_CONTENT = {
       "orcid": "0009-0009-8239-4528"
     }
   ],
-  "publications": [
-    {
-      "title": "A flexible waste bin number allocation plan applied to waste transportation electric fleets in smart cities",
-      "authors": "Shuotong Su, Jiawen Hu, Wenjun Li, Domokos Esztergár-Kiss, Tuqiang Zhou",
-      "venue": "Sustainable Cities and Society, Volume 121, Article 106223",
-      "year": 2025,
-      "doi": "10.1016/j.scs.2025.106223",
-      "url": "https://www.sciencedirect.com/science/article/pii/S2210670725001003",
-      "pdf": "",
-      "abstract": ""
-    }
-  ]
+  "publications": []
 };
