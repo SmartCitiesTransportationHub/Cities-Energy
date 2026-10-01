@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080f15">
+  <meta name="description" content="NEXUS CITY TEAM explores digital twins, clean energy and intelligent mobility. Discover the people and research shaping urban futures.">
+  <title>NEXUS CITY TEAM · Future Cities Team</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%23080f15'/%3E%3Cpath d='M10 29V11L30 29V11' fill='none' stroke='%236cf5cc' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="content.css">
+  <link rel="stylesheet" href="laboratories.css">
+  <script src="lab-config.js" defer></script>
+  <script src="content-data.js" defer></script>
+  <script src="content.js" defer></script>
+  <script src="navigation.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="laboratory">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="NEXUS CITY TEAM home"><span class="brand-mark" aria-hidden="true">N<span>↗</span></span><span class="brand-copy"><span data-site="name">NEXUS CITY TEAM</span><small data-site="subtitle">Future Cities Team</small></span></a>
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="navigation">Menu <span aria-hidden="true">＋</span></button>
+    <nav id="navigation" aria-label="Main navigation"><a class="active" href="#home">Home</a><a href="#observatory">Observatory</a><a href="#research">Research</a><a href="#team">People</a><a href="publications.html">Publications</a><a href="#about">About</a></nav>
+    <a class="header-link" href="#observatory">Explore the observatory <span aria-hidden="true">↗</span></a>
+  </header>
+  <div class="laboratory-switchbar"><a href="index.html#laboratories">← All teams</a><div><label for="lab-switch">Current team</label><select id="lab-switch" aria-label="Switch team"></select></div></div>
+
+  <main id="main">
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <img class="hero-image" src="assets/city-hero.webp" alt="A conceptual waterfront city with glass towers, green terraces and cyan lighting at night" fetchpriority="high" width="1672" height="941">
+      <div class="hero-shade"></div>
+      <div class="hero-content wrap">
+        <p class="eyebrow"><span class="line"></span><span id="lab-number">FUTURE URBAN ENERGY / TEAM</span></p>
+        <h1 id="hero-title" data-site="headline">Sense the city.
+Shape tomorrow.</h1>
+        <p class="hero-description" data-site="introduction">Where data, places and human imagination meet.<br>Exploring smarter, greener, more liveable urban futures.</p>
+        <div class="hero-actions"><a class="button primary" href="#observatory">Explore the observatory <span aria-hidden="true">↗</span></a><a class="text-link" href="#research">Our research <span aria-hidden="true">→</span></a></div>
+        <div class="hero-footnote"><span class="small-cross" aria-hidden="true">＋</span> Small experiments. New possibilities for urban life.</div>
+      </div>
+      <div class="scene-caption"><span class="scene-index">FIG. 01</span><span id="hero-caption">AI-generated city concept</span></div>
+      <div class="hero-coordinate" aria-hidden="true">NEXUS / URBAN FUTURES / 01</div>
+    </section>
+
+<section class="observatory section wrap" id="observatory" aria-labelledby="observatory-title">
+      <div class="section-heading"><div><p class="eyebrow">01 / CITY OBSERVATORY</p><h2 id="observatory-title">The pulse of a city.<br><span>Made visible.</span></h2></div><p id="observatory-intro"></p></div>
+      <div class="console">
+        <div class="console-top"><div class="tabs" role="tablist" aria-label="City simulation scenarios"><button type="button" id="tab-energy" role="tab" aria-selected="true" aria-controls="scenario-panel" tabindex="0" data-scenario="energy">Clean energy</button><button type="button" id="tab-mobility" role="tab" aria-selected="false" aria-controls="scenario-panel" tabindex="-1" data-scenario="mobility">Smart mobility</button><button type="button" id="tab-environment" role="tab" aria-selected="false" aria-controls="scenario-panel" tabindex="-1" data-scenario="environment">Urban environment</button></div><span class="simulation-label"><span aria-hidden="true">◇</span> SIMULATION / NOT LIVE DATA</span></div>
+        <div class="console-body" id="scenario-panel" role="tabpanel" aria-labelledby="tab-energy" tabindex="0">
+          <div class="experiment-controls"><div class="panel-kicker">SCENARIO CONFIGURATION <span>01—03</span></div><h3 id="scenario-title">Urban energy transition</h3><p id="scenario-description">How could a cleaner energy mix change the carbon intensity of everyday energy use?</p><label class="field-label" for="horizon">Scenario year</label><select id="horizon"><option value="2030">2030 · Near-term exploration</option><option value="2035" selected>2035 · Mid-term vision</option><option value="2040">2040 · Long-term outlook</option></select><div class="range-label"><label for="intensity" id="intensity-label">Clean energy share</label><output id="intensity-value" for="intensity">64%</output></div><input id="intensity" type="range" min="0" max="100" step="1" value="64"><div class="range-limits"><span>0%</span><span>100%</span></div><p class="control-note" id="control-note">Move the slider to compare energy mixes.</p><button class="reset-button" id="reset-scenario" type="button">↺ Reset scenario</button></div>
+          <div class="experiment-results"><div class="results-heading"><div><span class="panel-kicker">URBAN SYSTEM / 24 HOURS</span><h3 id="chart-title">Daily energy profile</h3></div><span class="chart-legend"><i></i><span id="series-name">Carbon intensity</span></span></div><div class="chart" id="chart-container"><svg id="scenario-chart" viewBox="0 0 720 220" role="img" aria-labelledby="chart-svg-title chart-svg-description"><title id="chart-svg-title">Simulated daily carbon intensity</title><desc id="chart-svg-description">Adjust the clean energy share to explore hourly changes. Export the data for individual values.</desc><defs><linearGradient id="chart-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#6cf5cc" stop-opacity=".26"/><stop offset="100%" stop-color="#6cf5cc" stop-opacity="0"/></linearGradient></defs><g id="chart-grid"></g><path id="chart-area" fill="url(#chart-fill)"/><path id="chart-line" fill="none" stroke="#6cf5cc" stroke-width="2.5" stroke-linejoin="round"/><g id="chart-labels"></g></svg></div><div class="result-metrics" id="result-metrics" aria-live="polite" aria-atomic="true"></div><div class="results-bottom"><span id="result-context">2035 scenario · Illustrative model</span><button type="button" id="download-data">Export data <span aria-hidden="true">↓</span></button></div></div>
+        </div>
+        <div class="model-disclosure"><details><summary>How is this simulation calculated?</summary><p id="model-formula"></p><p>This observatory uses transparent illustrative formulas. It is not connected to sensors or a real city database, and does not provide planning forecasts. Values demonstrate relationships between variables.</p></details></div>
+      </div>
+      <noscript><p class="noscript-note">Enable JavaScript to use simulations and data export. Research content remains available below.</p></noscript>
+    </section>
+
+    <section class="research section wrap" id="research" aria-labelledby="research-title"><div class="section-heading"><div><p class="eyebrow">02 / RESEARCH FRONTIERS</p><h2 id="research-title">Questions that connect.<br><span>Research that moves us forward.</span></h2></div><p id="research-intro"></p></div><div class="research-grid" id="research-topics"></div></section>
+
+    <section class="section wrap" id="team" aria-labelledby="team-title"><div class="section-heading"><div><p class="eyebrow">03 / PEOPLE BEHIND THE FUTURE</p><h2 id="team-title">Different perspectives.<br><span>A shared urban future.</span></h2></div><p>Our people<br>Connecting urban research and interdisciplinary practice.</p></div><div id="team-list" class="team-grid"><p class="content-empty">Team profiles will be available soon.</p></div></section>
+<section class="about section wrap" id="about" aria-labelledby="about-title"><div><p class="eyebrow">05 / OUR PERSPECTIVE</p><h2 id="about-title" data-site="aboutTitle">The next chapter of cities.<br>Built around <span>people.</span></h2></div><div class="about-copy"><p data-site="about">We explore the relationship between cities, technology and people.</p><a class="text-link" href="#observatory">Bring a question. Start an experiment. <span aria-hidden="true">↗</span></a></div></section>
+  </main>
+  <footer class="site-footer wrap"><a class="footer-brand" href="#home" data-site="name">NEXUS CITY TEAM</a><p><span data-site="subtitle">Future Cities Team</span><br><span>Observatory values are illustrative simulations.</span></p><div class="footer-links"><a class="back-top" href="#home">Back to top ↑</a></div></footer>
+</body>
+</html>
