@@ -7,7 +7,7 @@
   }
   function link(value, label) {
     const s = text(value, label, false, 2048); if (!s) return '';
-    try { const url = new URL(s); if (!['https:', 'http:'].includes(url.protocol)) throw new Error(); return url.href; }
+    try { const url = new URL(s); if (!['https:', 'http:'].includes(url.protocol) || url.href.length > 2048) throw new Error(); return url.href; }
     catch { throw new Error(`${label}: enter a full https:// or http:// URL.`); }
   }
   function photo(value, limit = 4500000) {
@@ -121,6 +121,8 @@
   }
   window.LabContent = { validate, validateBundle, render, renderContributors, renderResearch, defaults };
   const team=document.querySelector('#team-list'), papers=document.querySelector('#publication-list');
+  function start() {
+  try {
   if(team || papers) {
     try {
       const bundle=validateBundle(window.LAB_CONTENT);let data=bundle.network;
@@ -138,4 +140,9 @@
       applySite(data);renderDirectory(bundle);
     }catch(error){window.LAB_PAGE_FAILED=true;if(team)team.replaceChildren(element('p','content-empty',document.body.dataset.page==='network'?'Website credits are temporarily unavailable. Check the content file.':'Team information is temporarily unavailable. Check the content file.'));if(papers)papers.replaceChildren(element('p','content-empty','Publications are temporarily unavailable. Check the content file.'));const directory=document.querySelector('#laboratory-grid');if(directory)directory.replaceChildren(element('p','content-empty','Team content could not be loaded. Please check the content file.'));}
   }
+  } finally { document.documentElement.classList.remove('content-pending'); }
+  }
+  // When online publishing is active (online-loader.js), render the published content once it has loaded.
+  const ready=window.TEAM_CONTENT_READY;
+  if(ready && typeof ready.then==='function') ready.then(start,start); else start();
 })();

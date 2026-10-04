@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https: data: blob:; connect-src 'self' https://*.supabase.co; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#080f15">
+  <title>Editor · NEXUS CITY &amp; ENERGY</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%23080f15'/%3E%3Cpath d='M10 29V11L30 29V11' fill='none' stroke='%236cf5cc' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="admin.css">
+  <script src="config.js"></script>
+  <script src="lab-config.js" defer></script>
+  <script src="content.js" defer></script>
+  <script src="cloud-api.js" defer></script>
+  <script src="admin.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html" title="Open the public website"><span class="brand-mark" aria-hidden="true">N</span><span><strong>Website editor</strong><small id="site-name">NEXUS CITY &amp; ENERGY</small></span></a>
+    <div class="account" id="account" hidden>
+      <span class="account-label"><span id="account-email"></span><small id="account-role"></small></span>
+      <button type="button" class="ghost" id="open-password">Change password</button>
+      <button type="button" class="ghost" id="sign-out">Sign out</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="center-view" id="view-loading" aria-busy="true">
+      <p class="muted">Loading the editor…</p>
+    </section>
+
+    <section class="center-view" id="view-config" hidden>
+      <div class="card narrow">
+        <p class="eyebrow">SETUP REQUIRED</p>
+        <h1>Online publishing is not connected</h1>
+        <p id="config-message"></p>
+        <p class="muted">Open <code>config.js</code> in the GitHub repository and enter the Supabase Project URL and publishable key. See the deployment guide, step 5.</p>
+      </div>
+    </section>
+
+    <section class="center-view" id="view-login" hidden>
+      <form class="card narrow" id="login-form" novalidate>
+        <p class="eyebrow">TEAM &amp; ADMINISTRATOR SIGN-IN</p>
+        <h1>Sign in to edit</h1>
+        <p class="muted">Each team has its own login and can update only its own page. Accounts are created by the website administrator.</p>
+        <div class="field"><label for="login-email">Email</label><input id="login-email" type="email" autocomplete="username" required></div>
+        <div class="field"><label for="login-password">Password</label><input id="login-password" type="password" autocomplete="current-password" required></div>
+        <p class="form-error" id="login-error" role="alert" hidden></p>
+        <button type="submit" class="primary wide" id="login-submit">Sign in</button>
+      </form>
+    </section>
+
+    <section class="workspace" id="view-workspace" hidden>
+      <aside class="sidebar" aria-label="Editable areas">
+        <p class="sidebar-title" id="sidebar-title">Your areas</p>
+        <nav id="area-list"></nav>
+        <div class="sidebar-foot" id="admin-tools" hidden>
+          <p class="sidebar-title">Administrator</p>
+          <button type="button" class="ghost wide" id="download-backup">Download backup (content-data.js)</button>
+          <p class="hint">Save a copy of everything published. Upload it to GitHub to refresh the offline snapshot.</p>
+        </div>
+      </aside>
+      <div class="editor" id="editor">
+        <div class="editor-head">
+          <div><p class="eyebrow" id="area-kicker"></p><h1 id="area-title"></h1><p class="muted" id="area-note"></p></div>
+          <a class="ghost-link" id="view-live" target="_blank" rel="noopener">View live page ↗</a>
+        </div>
+        <div id="editor-body"></div>
+      </div>
+      <div class="publish-bar" role="region" aria-label="Publishing">
+        <p id="publish-status" aria-live="polite"></p>
+        <div class="publish-actions">
+          <button type="button" class="ghost" id="discard" disabled>Discard changes</button>
+          <button type="button" class="primary" id="publish" disabled>Publish</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="item-dialog" aria-labelledby="item-dialog-title">
+    <form method="dialog" id="item-form" novalidate>
+      <h2 id="item-dialog-title"></h2>
+      <div id="item-dialog-body"></div>
+      <p class="form-error" id="item-dialog-error" role="alert" hidden></p>
+      <div class="dialog-actions"><button type="button" class="ghost" id="item-cancel">Cancel</button><button type="submit" class="primary" id="item-save">Save to draft</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="password-dialog" aria-labelledby="password-title">
+    <form id="password-form" novalidate>
+      <h2 id="password-title">Change password</h2>
+      <div class="field"><label for="password-current">Current password</label><input id="password-current" type="password" autocomplete="current-password" required></div>
+      <div class="field"><label for="password-new">New password (at least 12 characters)</label><input id="password-new" type="password" autocomplete="new-password" minlength="12" required></div>
+      <div class="field"><label for="password-confirm">Repeat new password</label><input id="password-confirm" type="password" autocomplete="new-password" minlength="12" required></div>
+      <p class="form-error" id="password-error" role="alert" hidden></p>
+      <div class="dialog-actions"><button type="button" class="ghost" id="password-cancel">Cancel</button><button type="submit" class="primary" id="password-save">Change password</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="reauth-dialog" aria-labelledby="reauth-title">
+    <form id="reauth-form" novalidate>
+      <h2 id="reauth-title">Sign in again</h2>
+      <p class="muted">Your session has expired. Your unpublished changes are kept on this page.</p>
+      <div class="field"><label for="reauth-password">Password for <span id="reauth-email"></span></label><input id="reauth-password" type="password" autocomplete="current-password" required></div>
+      <p class="form-error" id="reauth-error" role="alert" hidden></p>
+      <div class="dialog-actions"><button type="button" class="ghost" id="reauth-cancel">Cancel</button><button type="submit" class="primary">Sign in</button></div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

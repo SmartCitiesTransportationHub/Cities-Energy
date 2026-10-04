@@ -6,3 +6,9 @@
 @media(max-width:760px){.laboratory-card,.laboratory-card:nth-last-child(-n+2),.laboratory-card:last-child{grid-column:auto}.publications-page{padding-top:55px;padding-bottom:60px}.publications-page h1{font-size:42px}.publications-page .eyebrow{font-size:10px;letter-spacing:1px}.publications-lead{font-size:16px}}
 .publication-content{margin-top:16px;font-size:14px;color:#c1d0d8}.paper-prose{font-size:16px;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--muted);line-height:1.9;margin-top:16px;max-width:950px}.publication-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:25px}.paper-figure{margin:0;min-width:0;background:#101a22;border:1px solid var(--line);padding:12px}.paper-figure img{display:block;width:100%;height:auto;max-height:420px;object-fit:contain}.paper-figure figcaption{font-size:14px;color:var(--muted);margin-top:12px;white-space:pre-line;overflow-wrap:anywhere}.paper-image-edit{display:grid;grid-template-columns:140px minmax(0,1fr);gap:20px;padding:18px;border:1px solid var(--line);min-width:0}.paper-image-edit>img{width:100%;height:140px;object-fit:contain}.paper-image-edit>div{min-width:0;display:grid;gap:15px}.image-unavailable{font-size:14px;color:var(--muted)}
 @media(max-width:760px){.publication-gallery{grid-template-columns:1fr}.paper-image-edit{grid-template-columns:1fr}.paper-image-edit>img{max-width:200px;height:140px}}
+
+/* Online publishing: hide placeholder text until published content has rendered.
+   The animation reveals the page after 7 s even if a script fails. */
+html.content-pending main,html.content-pending .brand-copy,html.content-pending .site-footer{opacity:0;animation:content-reveal .01s linear 7s forwards}
+main,.brand-copy,.site-footer{transition:opacity .25s ease}
+@keyframes content-reveal{to{opacity:1}}

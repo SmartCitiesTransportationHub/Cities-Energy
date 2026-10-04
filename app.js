@@ -1,5 +1,7 @@
 (() => {
   'use strict';
+  // Runs after content.js has rendered the team page (online content may load first).
+  const boot = () => {
   const $ = (selector) => document.querySelector(selector);
   if(window.LAB_PAGE_FAILED || !window.ACTIVE_LAB || !$('#scenario-panel')) return;
   const svgNS = 'http://www.w3.org/2000/svg';
@@ -97,4 +99,7 @@
     try { Promise.resolve(context.registerTool({name:'configure_city_simulation',title:'Configure city simulation',description:'Configure the illustrative city scenario, year and share. Updates the visible chart and returns simulated metrics, not real forecasts.',inputSchema:{type:'object',properties:{scenario:{type:'string',enum:allowed},year:{type:'integer',enum:[2030,2035,2040]},share:{type:'integer',minimum:0,maximum:100}},required:['scenario','year','share'],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute(input) { if(!input || !allowed.includes(input.scenario) || ![2030,2035,2040].includes(input.year) || !Number.isInteger(input.share) || input.share<0 || input.share>100) throw new Error('Invalid scenario, year or share'); setScenario(input.scenario); $('#horizon').value=String(input.year); $('#intensity').value=String(input.share); const result=render(); return {dataType:'simulation',scenario:active,year:result.year,share:result.share,metrics:result.metrics.map(([label,value,unit])=>({label,value,unit}))}; }},{signal:lifecycle.signal})).catch(()=>{}); } catch { /* Optional API; the standard interface remains available. */ }
     window.addEventListener('pagehide',event=>{if(!event.persisted) lifecycle.abort();},{once:true});
   }
+  };
+  const ready = window.TEAM_CONTENT_READY;
+  if (ready && typeof ready.then === 'function') ready.then(boot, boot); else boot();
 })();
